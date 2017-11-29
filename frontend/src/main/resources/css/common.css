@@ -1,0 +1,26 @@
+body {
+    background-color: #939194;
+    font-family: Verdana, serif;
+    margin: 0;
+}
+
+input {
+    font-family: Verdana, serif;
+}
+
+textarea {
+    font-family: Verdana, serif;
+}
+
+.left {
+    float: left;
+}
+
+.right {
+    float: right;
+}
+
+.constrained {
+    margin: auto;
+    max-width: 1000px;
+}
