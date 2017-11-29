@@ -1,5 +1,3 @@
 rootProject.name = 'kotlin-fullstack-sample'
-include 'docker'
 include 'backend'
 include 'frontend'
-
