@@ -7,7 +7,12 @@ interface PostDao {
     /**
      * @return post with given id from storage or null if none exist.
      */
-    fun findOneById(id: String): Post?
+    fun fetchOneById(id: String): Post?
+
+    /**
+     * @return all posts.
+     */
+    fun fetchAll(): Collection<Post>
 
     /**
      * Inserts post into storage or replaces one if id already in use.

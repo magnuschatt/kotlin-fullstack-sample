@@ -12,7 +12,7 @@ object Backend {
 
         fun put(post: Post, then: (XMLHttpRequest) -> Unit = {}) = Http.Json.put(POST_URL, post, then)
         fun get(id: String, then: (Post) -> Unit = {}) = Http.Json.get(POST_URL + "/$id", then)
-        fun delete(id: String, then: (XMLHttpRequest) -> Unit = {}) = Http.Json.delete(POST_URL + "/$id", then)
+        fun getAll(then: (Array<Post>) -> Unit = {}) = Http.Json.get(POST_URL, then)
     }
 
 }

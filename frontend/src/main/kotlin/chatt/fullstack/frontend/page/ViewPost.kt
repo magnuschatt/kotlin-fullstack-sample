@@ -3,26 +3,30 @@ package chatt.fullstack.frontend.page
 import chatt.fullstack.frontend.Backend
 import chatt.fullstack.frontend.framework.Html
 import chatt.fullstack.frontend.framework.Page
-import chatt.fullstack.frontend.page.component.topNavigationBar
+import chatt.fullstack.frontend.framework.Pages
 import kotlinx.html.dom.append
-import kotlinx.html.js.div
-import kotlinx.html.js.h1
-import kotlinx.html.js.h3
-import kotlinx.html.js.p
+import kotlinx.html.js.*
 
 val viewPost = Page.create("/post/view") {
     append {
-        topNavigationBar()
-        h1 { +"View post" }
+        button {
+            +"Fullstack"
+            onClickFunction = { Pages.switchTo(index) }
+        }
+
+        h1 {
+            +"View Post"
+        }
     }
 
     val id = Html.queryParams["id"]!!
-    Backend.Posts.get(id) {
+    Backend.Posts.get(id) { post ->
         append {
-            div {
-                h3 { +it.title }
-                p { +it.content }
+            div(classes = "textview") {
+                p { b { +post.title } }
+                p { +post.content }
             }
         }
     }
+
 }

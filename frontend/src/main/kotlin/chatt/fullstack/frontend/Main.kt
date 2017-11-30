@@ -10,9 +10,8 @@ fun main(args: Array<String>) {
     Pages.register(index)
     Pages.register(createPost)
     Pages.register(viewPost)
-    Pages.register(some)
 
-    Pages.renderCurrent()
+    Pages.refresh()
 
 }
 

@@ -76,7 +76,7 @@ object Http {
 
         fun <T> get(url: String, then: (T) -> Unit = {}) {
             Http.get(url) { req ->
-                then(JSON.parse<T>(req.responseText))
+                then(JSON.parse(req.responseText))
             }
         }
 

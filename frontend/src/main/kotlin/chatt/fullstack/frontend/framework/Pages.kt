@@ -27,7 +27,7 @@ object Pages {
     }
 
     init {
-        window.onpopstate = { renderCurrent() }
+        window.onpopstate = { refresh() }
     }
 
     private fun String.fixed() = this
@@ -55,10 +55,10 @@ object Pages {
         val url = page.url + queryParams.toQueryString()
         if (url == currentPath) return
         window.history.pushState(null, url, url)
-        renderCurrent()
+        refresh()
     }
 
-    fun renderCurrent() {
+    fun refresh() {
         currentDiv = document.create.div().also {
             it.apply(map[currentPath] ?: pageNotFound)
             currentDiv?.remove()

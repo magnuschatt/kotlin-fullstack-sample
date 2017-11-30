@@ -11,14 +11,21 @@ import io.ktor.http.HttpStatusCode
 import io.ktor.jackson.jackson
 import io.ktor.request.receive
 import io.ktor.response.respond
-import io.ktor.routing.*
+import io.ktor.routing.Routing
+import io.ktor.routing.delete
+import io.ktor.routing.get
+import io.ktor.routing.put
+
+val postDao = InMemoryPostDao()
 
 @Suppress("unused")
 fun Application.main() {
 
     install(DefaultHeaders)
     install(CallLogging)
-    install(ContentNegotiation) { jackson {} }
+    install(ContentNegotiation) {
+        jackson {}
+    }
 
     install(CORS) {
         methods.add(HttpMethod.Put)
@@ -34,9 +41,6 @@ fun Application.main() {
     }
 
     install(Routing) {
-
-        val postDao = InMemoryPostDao()
-
         put("/post") {
             val post = call.receive<Post>()
             val replaced = postDao.insertOrReplace(post)
@@ -46,16 +50,14 @@ fun Application.main() {
 
         get("/post/{id}") {
             val id = call.parameters["id"]!!
-            val response = postDao.findOneById(id) ?: HttpStatusCode.NotFound
+            val response = postDao.fetchOneById(id) ?: HttpStatusCode.NotFound
             call.respond(response)
         }
 
-        delete("/post/{id}") {
-            val id = call.parameters["id"]!!
-            postDao.deleteById(id)
-            call.respond(HttpStatusCode.NoContent)
+        get("/post") {
+            val posts = postDao.fetchAll()
+            call.respond(posts)
         }
-
     }
 
 }
