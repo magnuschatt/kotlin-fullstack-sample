@@ -16,8 +16,6 @@ import io.ktor.routing.delete
 import io.ktor.routing.get
 import io.ktor.routing.put
 
-val postDao = InMemoryPostDao()
-
 @Suppress("unused")
 fun Application.main() {
 
@@ -41,6 +39,9 @@ fun Application.main() {
     }
 
     install(Routing) {
+
+        val postDao = InMemoryPostDao()
+
         put("/post") {
             val post = call.receive<Post>()
             val replaced = postDao.insertOrReplace(post)
