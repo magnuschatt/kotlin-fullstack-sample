@@ -10,9 +10,9 @@ object Backend {
     object Posts {
         private const val POST_URL = BACKEND_BASE_URL + "/post"
 
-        fun put(post: Post, then: (XMLHttpRequest) -> Unit = {}) = Http.Json.put(POST_URL, post, then)
-        fun get(id: String, then: (Post) -> Unit = {}) = Http.Json.get(POST_URL + "/$id", then)
-        fun getAll(then: (Array<Post>) -> Unit = {}) = Http.Json.get(POST_URL, then)
+        fun insertOrReplace(post: Post, then: (XMLHttpRequest) -> Unit = {}) = Http.Json.put(POST_URL, post, then)
+        fun fetchOneById(id: String, then: (Post) -> Unit = {}) = Http.Json.get(POST_URL + "/$id", then)
+        fun fetchAll(then: (Array<Post>) -> Unit = {}) = Http.Json.get(POST_URL, then)
     }
 
 }

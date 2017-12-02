@@ -22,13 +22,12 @@ fun Application.main() {
     install(DefaultHeaders)
     install(CallLogging)
     install(ContentNegotiation) {
-        jackson {}
+        jackson {} // Register Jackson as the JSON parser
     }
 
     install(CORS) {
         methods.add(HttpMethod.Put)
         methods.add(HttpMethod.Get)
-        methods.add(HttpMethod.Delete)
         host("localhost:80")
     }
 

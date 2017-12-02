@@ -5,12 +5,11 @@ import chatt.fullstack.frontend.framework.Page
 import chatt.fullstack.frontend.framework.Pages
 import kotlinx.html.dom.append
 import kotlinx.html.js.*
-import kotlinx.html.style
 
 val index: Page = Page.create("/") {
     append {
         button {
-            +"Fullstack"
+            +"Home"
             onClickFunction = { Pages.refresh() }
         }
 
@@ -24,7 +23,7 @@ val index: Page = Page.create("/") {
         }
     }
 
-    Backend.Posts.getAll { posts ->
+    Backend.Posts.fetchAll { posts ->
         append {
             br()
             div(classes = "linkview") {

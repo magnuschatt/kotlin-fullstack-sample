@@ -10,7 +10,7 @@ import kotlinx.html.js.*
 val viewPost = Page.create("/post/view") {
     append {
         button {
-            +"Fullstack"
+            +"Home"
             onClickFunction = { Pages.switchTo(index) }
         }
 
@@ -20,7 +20,7 @@ val viewPost = Page.create("/post/view") {
     }
 
     val id = Html.queryParams["id"]!!
-    Backend.Posts.get(id) { post ->
+    Backend.Posts.fetchOneById(id) { post ->
         append {
             div(classes = "textview") {
                 p { b { +post.title } }

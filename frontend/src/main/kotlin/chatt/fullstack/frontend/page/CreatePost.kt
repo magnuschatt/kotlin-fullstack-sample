@@ -12,7 +12,7 @@ import kotlin.math.absoluteValue
 val createPost = Page.create("/post/create") {
     append {
         button {
-            +"Fullstack"
+            +"Home"
             onClickFunction = { Pages.switchTo(index) }
         }
 
@@ -44,7 +44,7 @@ private fun submitPost(title: String, content: String) {
     if (title.isBlank() || content.isBlank()) return
     val id = "" + (title + content).hashCode().absoluteValue // not good, but works for this example
     val post = Post(id, title, content)
-    Backend.Posts.put(post) {
+    Backend.Posts.insertOrReplace(post) {
         Pages.switchTo(viewPost, mapOf("id" to id))
     }
 }
