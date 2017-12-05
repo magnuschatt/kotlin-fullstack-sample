@@ -6,10 +6,12 @@ import io.ktor.application.Application
 import io.ktor.application.call
 import io.ktor.application.install
 import io.ktor.features.*
+import io.ktor.http.ContentType
 import io.ktor.http.HttpMethod
 import io.ktor.http.HttpStatusCode
 import io.ktor.jackson.jackson
 import io.ktor.request.receive
+import io.ktor.response.contentType
 import io.ktor.response.respond
 import io.ktor.routing.Routing
 import io.ktor.routing.delete
@@ -19,8 +21,14 @@ import io.ktor.routing.put
 @Suppress("unused")
 fun Application.main() {
 
-    install(DefaultHeaders)
     install(CallLogging)
+
+    install(DefaultHeaders) {
+        header("Cache-Control", "no-cache, no-store, must-revalidate") // disable caching
+        header("Pragma", "no-cache") // disable caching
+        header("Expires", "0") // disable caching
+    }
+
     install(ContentNegotiation) {
         jackson {} // Register Jackson as the JSON parser
     }
@@ -40,6 +48,7 @@ fun Application.main() {
     install(Routing) {
 
         val postDao = InMemoryPostDao()
+        postDao.insertOrReplace(Post("123", "Initial Test Post", "This an initial test post"))
 
         put("/post") {
             val post = call.receive<Post>()
@@ -57,6 +66,13 @@ fun Application.main() {
         get("/post") {
             val posts = postDao.fetchAll()
             call.respond(posts)
+        }
+
+        delete("/post/{id}") {
+            val id = call.parameters["id"]!!
+            val deleted = postDao.deleteById(id)
+            val response = if (deleted) HttpStatusCode.NoContent else HttpStatusCode.NotFound
+            call.respond(response)
         }
     }
 

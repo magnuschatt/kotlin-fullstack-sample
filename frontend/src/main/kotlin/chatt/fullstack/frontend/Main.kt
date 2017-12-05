@@ -11,7 +11,7 @@ fun main(args: Array<String>) {
     Pages.register(createPost)
     Pages.register(viewPost)
 
-    Pages.refresh()
+    Pages.renderCurrent()
 
 }
 

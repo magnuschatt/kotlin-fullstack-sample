@@ -7,14 +7,14 @@ dependencies {
     compile "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
     compile "ch.qos.logback:logback-classic:$logback_version"
     compile "io.ktor:ktor-server-core:$ktor_version"
-    compile "io.ktor:ktor-server-netty:$ktor_version"
+    compile "io.ktor:ktor-server-jetty:$ktor_version"
     compile "io.ktor:ktor-jackson:$ktor_version"
-    compile "org.litote.kmongo:kmongo:$kmongo_version"
 
     testCompile "junit:junit:$junit_version"
+    testCompile "com.github.jkcclemens:khttp:$khttp_version"
 }
 
-mainClassName = 'io.ktor.server.netty.DevelopmentEngine'
+mainClassName = 'io.ktor.server.jetty.DevelopmentEngine'
 
 kotlin {
     experimental {

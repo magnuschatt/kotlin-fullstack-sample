@@ -12,7 +12,7 @@ object Backend {
 
         fun insertOrReplace(post: Post, then: (XMLHttpRequest) -> Unit = {}) = Http.Json.put(POST_URL, post, then)
         fun fetchOneById(id: String, then: (Post) -> Unit = {}) = Http.Json.get(POST_URL + "/$id", then)
-        fun fetchAll(then: (List<Post>) -> Unit = {}) = Http.Json.get(POST_URL, then)
+        fun fetchAll(then: (Array<Post>) -> Unit = {}) = Http.Json.get(POST_URL, then)
     }
 
 }

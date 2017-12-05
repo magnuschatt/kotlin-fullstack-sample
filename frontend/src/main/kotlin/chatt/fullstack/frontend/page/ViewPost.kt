@@ -22,7 +22,7 @@ val viewPost = Page.create("/post/view") {
     val id = Html.queryParams["id"]!!
     Backend.Posts.fetchOneById(id) { post ->
         append {
-            div(classes = "textview") {
+            div(classes = "whitebox") {
                 p { b { +post.title } }
                 p { +post.content }
             }

@@ -7,6 +7,7 @@ import chatt.fullstack.shared.Post
 import kotlinx.html.InputType
 import kotlinx.html.dom.append
 import kotlinx.html.js.*
+import kotlin.js.Date
 import kotlin.math.absoluteValue
 
 val createPost = Page.create("/post/create") {
@@ -42,7 +43,7 @@ val createPost = Page.create("/post/create") {
 
 private fun submitPost(title: String, content: String) {
     if (title.isBlank() || content.isBlank()) return
-    val id = "" + (title + content).hashCode().absoluteValue // not good, but works for this example
+    val id = "" + Date().hashCode().absoluteValue // not good, but works for this example
     val post = Post(id, title, content)
     Backend.Posts.insertOrReplace(post) {
         Pages.switchTo(viewPost, mapOf("id" to id))

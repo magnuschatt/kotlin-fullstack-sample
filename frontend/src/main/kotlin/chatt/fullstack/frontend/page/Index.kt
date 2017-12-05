@@ -10,7 +10,7 @@ val index: Page = Page.create("/") {
     append {
         button {
             +"Home"
-            onClickFunction = { Pages.refresh() }
+            onClickFunction = { Pages.renderCurrent() }
         }
 
         h1 {
@@ -26,7 +26,7 @@ val index: Page = Page.create("/") {
     Backend.Posts.fetchAll { posts ->
         append {
             br()
-            div(classes = "linkview") {
+            div(classes = "greybox") {
                 posts.forEach { post ->
                     button {
                         +post.title
