@@ -52,12 +52,12 @@ class PostIntegrationTests {
 
         val post1 = Post(id, "xxx", "Content1")
         val put1 = putPost(post1)
-        assertEquals(put1.statusCode, 201) // Created
+        assertEquals(201, put1.statusCode) // Created
         assertEquals(post1, getPost(id).content.toPost())
 
         val post2 = Post(id, "xxx", "Content1")
         val put2 = putPost(post2)
-        assertEquals(put2.statusCode, 200) // OK
+        assertEquals(200, put2.statusCode) // OK
         assertEquals(post2, getPost(id).content.toPost())
 
         deletePost(post1.id)
@@ -69,10 +69,10 @@ class PostIntegrationTests {
         val id = uuid()
         val putPost = Post(id, "Title1", "Content1")
         val put = putPost(putPost)
-        assertEquals(put.statusCode, 201) // Created
+        assertEquals(201, put.statusCode) // Created
 
         val get = getPost(id)
-        assertEquals(get.statusCode, 200) // OK
+        assertEquals(200, get.statusCode) // OK
         val getPost = get.content.toPost()
         assertEquals(putPost, getPost)
 
@@ -92,11 +92,11 @@ class PostIntegrationTests {
 
         inPosts.forEach { post ->
             val put = putPost(post)
-            assertEquals(put.statusCode, 201) // Created
+            assertEquals(201, put.statusCode) // Created
         }
 
         val getAll = getAllPosts()
-        assertEquals(getAll.statusCode, 200) // OK
+        assertEquals(200, getAll.statusCode) // OK
         val outPosts = getAll.content.toPostArray().toSet()
         assertTrue(outPosts.containsAll(inPosts))
 
