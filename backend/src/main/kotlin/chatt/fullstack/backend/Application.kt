@@ -6,12 +6,10 @@ import io.ktor.application.Application
 import io.ktor.application.call
 import io.ktor.application.install
 import io.ktor.features.*
-import io.ktor.http.ContentType
 import io.ktor.http.HttpMethod
 import io.ktor.http.HttpStatusCode
 import io.ktor.jackson.jackson
 import io.ktor.request.receive
-import io.ktor.response.contentType
 import io.ktor.response.respond
 import io.ktor.routing.Routing
 import io.ktor.routing.delete

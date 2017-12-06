@@ -21,10 +21,11 @@ class PostIntegrationTests {
     private fun backend(path: String) = backendBaseUrl + path
     private fun ByteArray.toPost() = jsonMapper.readValue<Post>(this)
     private fun ByteArray.toPostArray() = jsonMapper.readValue<Array<Post>>(this)
-    private fun Post.toMap() = jsonMapper.convertValue<Map<String, Any>>(this)
+    private fun Post.toMap() = jsonMapper.convertValue<Map<String, String>>(this)
     private fun uuid() = UUID.randomUUID().toString().replace("-","")
 
     private fun putPost(post: Map<String, Any>) = put(backend("/post"), json = post)
+    private fun putPost(post: Post) = putPost(post.toMap())
     private fun getPost(id: String) = get(backend("/post/$id"))
     private fun getAllPosts() = get(backend("/post"))
     private fun deletePost(id: String) = delete(backend("/post/$id"))
@@ -50,12 +51,12 @@ class PostIntegrationTests {
         val id = uuid()
 
         val post1 = Post(id, "xxx", "Content1")
-        val put1 = putPost(post1.toMap())
+        val put1 = putPost(post1)
         assertEquals(put1.statusCode, 201) // Created
         assertEquals(post1, getPost(id).content.toPost())
 
         val post2 = Post(id, "xxx", "Content1")
-        val put2 = putPost(post2.toMap())
+        val put2 = putPost(post2)
         assertEquals(put2.statusCode, 200) // OK
         assertEquals(post2, getPost(id).content.toPost())
 
@@ -67,7 +68,7 @@ class PostIntegrationTests {
     fun `test successful put, get and delete`() {
         val id = uuid()
         val putPost = Post(id, "Title1", "Content1")
-        val put = putPost(putPost.toMap())
+        val put = putPost(putPost)
         assertEquals(put.statusCode, 201) // Created
 
         val get = getPost(id)
@@ -90,7 +91,7 @@ class PostIntegrationTests {
         )
 
         inPosts.forEach { post ->
-            val put = putPost(post.toMap())
+            val put = putPost(post)
             assertEquals(put.statusCode, 201) // Created
         }
 
