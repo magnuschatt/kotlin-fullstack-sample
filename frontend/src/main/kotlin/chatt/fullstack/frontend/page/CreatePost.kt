@@ -10,7 +10,7 @@ import kotlinx.html.js.*
 import kotlin.js.Date
 import kotlin.math.absoluteValue
 
-val createPost = Page.create("/post/create") {
+val createPost: Page = Page.create("/post/create") {
     append {
         button {
             +"Home"

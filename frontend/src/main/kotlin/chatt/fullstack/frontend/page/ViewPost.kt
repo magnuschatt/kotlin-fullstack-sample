@@ -7,7 +7,7 @@ import chatt.fullstack.frontend.framework.Pages
 import kotlinx.html.dom.append
 import kotlinx.html.js.*
 
-val viewPost = Page.create("/post/view") {
+val viewPost: Page = Page.create("/post/view") {
     append {
         button {
             +"Home"
